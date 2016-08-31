@@ -1,0 +1,153 @@
+{
+  "type": "object",
+  "required": [
+    "PoolName"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "PoolName": {
+      "type": "string",
+      "pattern": "[\\w\\d\\s+=,\\.@-]{1,128}"
+    },
+    "AliasAttributes": {
+      "type": "array",
+      "item": {
+        "type": "string",
+        "enum": ["phone_number", "email", "prefered_username"]
+      }
+    },
+    "AutoVerifiedAttributes": {
+      "type": "array",
+      "item": {
+        "type": "string",
+        "enum": ["phone_number", "email"]
+      }
+    },
+    "DeviceConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ChallengeRequiredOnNewDevice": {
+          "type": "string",
+          "enum": ["true", "false"]
+        },
+        "DeviceOnlyRememberedOnUserPrompt": {
+          "type": "string",
+          "enum": ["true", "false"]
+        }
+      }
+    },
+    "EmailConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ReplyToEmailAddress": {
+          "type": "string"
+        },
+        "SourceArn": {
+          "type": "string",
+          "pattern": "arn:aws:ses:(\\w+-\\w+-\\d+):\\d{12}:identity/.*"
+        }
+      }
+    },
+    "EmailVerificationMessage": {
+      "type": "string"
+    },
+    "EmailVerificationSubject": {
+      "type": "string"
+    },
+    "LambdaConfig": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "CreateAuthChallenge": {
+          "type": "string",
+          "pattern": "arn:aws:lambda:(\\w+-\\w+-\\d+):\\d{12}:function:.*"
+        },
+        "CustomMessage": {
+          "type": "string",
+          "pattern": "arn:aws:lambda:(\\w+-\\w+-\\d+):\\d{12}:function:.*"
+        },
+        "DefineAuthChallenge": {
+          "type": "string",
+          "pattern": "arn:aws:lambda:(\\w+-\\w+-\\d+):\\d{12}:function:.*"
+        },
+        "PostAuthentication": {
+          "type": "string",
+          "pattern": "arn:aws:lambda:(\\w+-\\w+-\\d+):\\d{12}:function:.*"
+        },
+        "PostConfirmation": {
+          "type": "string",
+          "pattern": "arn:aws:lambda:(\\w+-\\w+-\\d+):\\d{12}:function:.*"
+        },
+        "PreAuthentication": {
+          "type": "string",
+          "pattern": "arn:aws:lambda:(\\w+-\\w+-\\d+):\\d{12}:function:.*"
+        },
+        "PreSignUp": {
+          "type": "string",
+          "pattern": "arn:aws:lambda:(\\w+-\\w+-\\d+):\\d{12}:function:.*"
+        },
+        "VerifyAuthChallengeResponse": {
+          "type": "string",
+          "pattern": "arn:aws:lambda:(\\w+-\\w+-\\d+):\\d{12}:function:.*"
+        }
+      }
+    },
+    "MfaConfiguration": {
+      "type": "string",
+      "enum": ["OFF", "ON", "OPTIONAL"]
+    },
+    "Policies": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "PasswordPolicy": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "MinimumLength": {
+              "type": "string",
+              "pattern": "\\d+"
+            },
+            "RequireLowercase": {
+              "type": "string",
+              "enum": ["true", "false"]
+            },
+            "RequireNumbers": {
+              "type": "string",
+              "enum": ["true", "false"]
+            },
+            "RequireSymbols": {
+              "type": "string",
+              "enum": ["true", "false"]
+            },
+            "RequireUppercase": {
+              "type": "string",
+              "enum": ["true", "false"]
+            }
+          }
+        }
+      }
+    },
+    "SmsAuthenticationMessage": {
+      "type": "string"
+    },
+    "SmsConfiguration": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ExternalId": {
+          "type": "string"
+        },
+        "SnsCallerArn": {
+          "type": "string",
+          "pattern": "arn:aws:sns:(\\w+-\\w+-\\d+):\\d{12}:.*"
+        }
+      }
+    },
+    "SmsVerificationMessage": {
+      "type": "string"
+    }
+  }
+}
