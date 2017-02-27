@@ -4,17 +4,31 @@ This custom resource is based on [cfn-lambda](https://github.com/andrew-templeto
 
 ## Install
 
-Clone the repository on laptop. Inside the root folder:
+Clone the repository on laptop and build function. Inside the root folder:
 
 ```
 $ npm install
-$ npm run cfn-lambda-deploy
+$ npm build
 ```
-This command deploy the lambda helper on your default AWS region and `us-east-1`, `us-west-2`, `eu-west-1`, `ap-northeast-1`. To change this configuration you can follow this [link](https://github.com/andrew-templeton/cfn-lambda#deployment-of-lambdas)
+
+Deploy to the specified region (us-east-1) using Lambda function cloudformation template with transformations `example/CognitoUserCFn.cform`. Please ensure that bucket is in the same region in order for deploy to work.
+
+```
+$ export AWS_DEFAULT_REGION=us-east-1
+$ ./scripts/deploy_example.sh CognitoUserCFn cf-templates-bucket-us-east-1
+```
 
 ## Example
 
 You can test the custom resource by running `example/user-pool.cform`. This only parameter is the name of the lambda function created during the installation.
+
+You can also use all in one deploy, which creates lambda functions and at the same time it deploys the
+userpool from `example/CognitoUserCFnWithExamplePool.cform`
+
+```
+$ export AWS_DEFAULT_REGION=us-east-1
+$ ./scripts/deploy_example.sh CognitoUserCFnWithExamplePool cf-templates-bucket-us-east-1
+```
 
 ## Docs
 
